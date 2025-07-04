@@ -1,0 +1,17 @@
+{
+  "name": "Armor Builder - Kettlebell Complex Tracker",
+  "short_name": "Armor Builder",
+  "description": "Track your progress through Dan John's Armor Building Complex",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "/kettlebell.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
