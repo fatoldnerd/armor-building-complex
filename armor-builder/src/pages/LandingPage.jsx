@@ -18,10 +18,10 @@ const LandingPage = () => {
             <p className="hero-description">
               Developed by world-renowned strength coach Dan John, the Armor Building Complex 
               is a time-tested kettlebell sequence designed to build the kind of muscle that 
-              protects, supports, and endures — your body's natural armor.
+              protects, supports, and endures; your body's natural armor.
             </p>
             <p className="hero-tagline">
-              <strong>This isn't just about reps — it's about resilience.</strong>
+              <strong>This isn't just about reps — it's about resilience!</strong>
             </p>
             <p className="hero-sequence">
               <strong>The Sequence:</strong> 2 Kettlebell Cleans + 1 Military Press + 3 Front Squats
@@ -328,13 +328,19 @@ const LandingPage = () => {
         .about {
           padding: 80px 0;
           background: transparent;
+          position: relative; // Added for positioning context
+        }
+
+        .about-content {
+          padding-top: var(--space-8); // Added top padding to move content up
         }
 
         .section-title {
           text-align: center;
           font-size: var(--font-3xl);
           font-weight: 600;
-          margin-bottom: var(--space-12);
+          margin-bottom: var(--space-6);
+          margin-top: var(--space-4); // Added top margin to move text up
           color: var(--gray-800);
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           -webkit-background-clip: text;
@@ -433,11 +439,11 @@ const LandingPage = () => {
         
         .philosophy {
           font-size: var(--font-lg);
-          color: var(--primary-600);
+          color: #e2e8f0;
           font-weight: 500;
           margin-bottom: 0;
           padding: var(--space-4) var(--space-6);
-          background: var(--glass-bg);
+          background: var(--glass-bg-strong);
           backdrop-filter: var(--backdrop-blur);
           border: 1px solid var(--glass-border);
           border-radius: var(--radius-lg);
