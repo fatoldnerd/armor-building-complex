@@ -23,3 +23,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Sites workflow state and packaged previews
+.sites-runtime/
+outputs/

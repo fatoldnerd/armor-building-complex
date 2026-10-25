@@ -4,8 +4,8 @@
   "description": "Track your progress through Dan John's Armor Building Complex",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#667eea",
+  "background_color": "#101310",
+  "theme_color": "#171e13",
   "icons": [
     {
       "src": "/kettlebell.svg",

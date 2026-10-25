@@ -19,12 +19,10 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [demoMode, setDemoMode] = useState(false);
 
   useEffect(() => {
     // If Firebase auth is not available, set up demo mode
     if (!auth) {
-      console.log('Running in demo mode - Firebase auth not available');
       setUser(null);
       setLoading(false);
       return;
@@ -40,9 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const signInWithGoogle = async () => {
     if (!auth || !googleProvider) {
-      console.log('Demo mode: Google sign-in not available');
-      alert('Demo mode: Firebase authentication not configured. The app will show all features with sample data.');
-      return null;
+      throw new Error('Firebase sign-in is not configured.');
     }
     
     try {
