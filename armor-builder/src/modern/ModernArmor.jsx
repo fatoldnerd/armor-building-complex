@@ -104,9 +104,9 @@ export default function ModernArmor() {
     setReady(true);
     if (!user) { setSessions(read(`${key}:history`, [])); setLoadState('loaded'); return; }
     setLoadState('loading');
-    return onSnapshot(collection(db, 'users', user.uid, 'workouts'), snapshot => {
-      const records = snapshot.docs.map(document => ({...document.data(), id:document.id})).filter(s => Number.isFinite(s.completedRounds) && s.completedRounds > 0 && s.startTime).sort((a,b)=>new Date(b.startTime)-new Date(a.startTime));
-      setSessions(records); setLoadState('loaded'); setHistoryError('');
+    return onSnapshot(collection(db, 'users', user.uid, 'workouts'), {includeMetadataChanges:true}, snapshot => {
+      const records = snapshot.docs.filter(document => !document.metadata.hasPendingWrites).map(document => ({...document.data(), id:document.id})).filter(s => Number.isFinite(s.completedRounds) && s.completedRounds > 0 && s.startTime).sort((a,b)=>new Date(b.startTime)-new Date(a.startTime));
+      setSessions(records); setLoadState(snapshot.metadata.fromCache?'cached':'loaded'); setHistoryError('');
     }, () => { setLoadState('error'); setHistoryError('Couldn’t load your workout history. Check your connection and reload to try again.'); });
   }, [key, user]);
 
@@ -179,6 +179,7 @@ export default function ModernArmor() {
     </aside>
     <div className="workspace"><header className="topbar"><span className="breadcrumb">Your training <span>/</span> <strong>Armor Builder</strong></span><span className="mobile-brand"><span className="orange"><Bell small/></span> ARMOR BUILDER</span><div className="top-actions">{preview&&!user&&<span className="preview-tag">Device preview</span>}<span className="top-date">{new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</span><button className="account-button" onClick={()=>setModal('auth')} aria-label={user?'Account':'Sign in'}>{user ? <span className="avatar">{(user.displayName || user.email || 'A')[0].toUpperCase()}</span> : <><Icon name="shield" size={16}/><span>Sign in</span></>}</button></div></header>
     {preview&&!user&&<div className="preview-banner">Device preview · sessions stay on this device. <button onClick={()=>setModal('auth')}>Sign in to sync <Icon name="arrow" size={13}/></button></div>}
+    {user&&<div className="preview-banner cloud-banner" role="status">{loadState==='loaded'?'Cloud connected · completed sessions sync to your account.':loadState==='error'?'Cloud unavailable · your active workout stays on this device.':loadState==='cached'?'Showing device cache · waiting for cloud connection…':'Connecting to your cloud history…'}</div>}
     <main id="main-content">
       {tab==='train'&&<>
         <div className="page-heading"><div><div className="eyebrow"><span/> YOUR TIME. YOUR STRENGTH.</div><h1>{active ? <>ONE ROUND.<br/><span>THEN THE NEXT.</span></>:<>BUILD YOUR<br/><span>EVERYDAY ARMOR.</span></>}</h1><p>{active?'Stay present. The numbers are taken care of.':'Two cleans. One press. Three squats. Show up and make it count.'}</p></div><div className="heading-stamp"><Icon name="shield" size={23}/><span>THE ARMOR<br/>BUILDING COMPLEX</span></div></div>
