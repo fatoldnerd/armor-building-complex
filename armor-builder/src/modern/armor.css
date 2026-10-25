@@ -28,4 +28,4 @@ main{max-width:1370px;margin:auto;padding:39px 46px 0}.page-heading{display:flex
 
 .brand-bell-image{width:38px;height:44px;object-fit:contain;display:block;flex-shrink:0}
 .mobile-brand .brand-bell-image{width:23px;height:30px}
-.bell-art{object-fit:contain;opacity:1}
+.bell-art{object-fit:contain;opacity:1;height:auto}
