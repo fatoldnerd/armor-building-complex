@@ -27,3 +27,6 @@ dist-ssr
 # Local Sites workflow state and packaged previews
 .sites-runtime/
 outputs/
+
+# Local Firebase Hosting upload cache
+.firebase/
