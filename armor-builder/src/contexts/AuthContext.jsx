@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      setUser(user && !user.isAnonymous ? user : null);
       setLoading(false);
     });
 
